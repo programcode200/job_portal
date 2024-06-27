@@ -1,0 +1,130 @@
+{%extends "base.html"%}
+{% load static %}
+{% block content %}
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        margin: 2rem auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+        width: 950px;
+        text-align: left;
+        justify-content: flex-end;
+        /* Add this line */
+    }
+
+    h1 {
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        width: 100%;
+        text-align: left;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: #2196F3;
+        box-shadow: 0 0 2px 1px rgba(33, 150, 243, 0.5);
+    }
+
+    input:hover,
+    select:hover {
+        border-color: #999;
+    }
+
+    .not-here-link {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .not-here-link:hover {
+        color: #333;
+    }
+
+
+    .btn1 {
+        display: inline-block;
+        padding: 1rem 3rem;
+        font-size: 1.5rem;
+        color: var(--white);
+        background-color: var(--main-color);
+        border-radius: .6rem;
+        text-align: center;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  
+</style>
+
+
+<div class="container">
+    <h1>Create an Employer Account</h1>
+    <form action="{% url 'save_emp_account' %}" method="POST" onsubmit="return validatePhone()">
+        {% csrf_token %}
+        <label for="company-name">Your company's name </label>
+        <input type="text" id="company-name" name="company_name" required>
+
+        <label for="employees">Required number of employees</label>
+        <select id="employees" name="employees">
+            <option value="">Select an option</option>
+            <option value="1-49">1-49</option>
+            <option value="50-80">50-80</option>
+            <option value="81-100">81-100</option>
+            <option value="100+">100+</option>
+        </select>
+
+        <label for="fullname">First name</label>
+        <input type="text" id="fullname" name="f_name" required>
+
+        <label for="fullname">Last name</label>
+        <input type="text" id="fullname" name="l_name" required>
+
+        <label for="phone">Phone number </label>
+        <input type="tel" id="phone" name="phone" pattern="^\+91\d{10}$" placeholder="+919876543210" required>
+
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+
+        <!-- <button type="submit" class="continue-link">Continue</button>  -->
+        <!-- <a href="/postjob" class="btn">Continue</a> -->
+
+        <input type="submit" value="Continue" name="submit" class="btn1">
+
+
+    </form>
+
+</div>
+
+{% endblock %}

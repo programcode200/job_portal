@@ -1,0 +1,174 @@
+{%extends "base.html"%}
+{% load static %}
+{% block content %}
+
+<style>
+    .heading-title {
+        border-top: 1rem solid var(--main-color);
+        border-bottom: 1rem solid var(--main-color);
+        background-color: var(--black);
+        color: var(--white);
+        text-align: center;
+        padding: 2rem 2rem;
+        font-size: 3.5rem;
+    }
+
+    .center-container {
+        margin-left: 300px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        height: 100px;
+    }
+
+    input[type="file"] {
+        display: block;
+        margin-top: 10px;
+    }
+
+
+    .file-upload-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .file-upload-button {
+        display: block;
+        width: 20%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .file-upload-button:hover {
+        background-color: #45a049;
+    }
+
+    .file-upload-button:focus {
+        outline: none;
+    }
+
+    .file-upload-input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .form-group textarea {
+        width: 100%;
+        height: 70px;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        resize: vertical;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+
+<div class="heading-title">Apply for job</div>
+
+<div class="container">
+    <form action="{% url 'apply_job' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Add Contact Details</h3>
+        <input type="hidden" name="job_id" value="{{ job_id }}">
+
+        <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{request.user.first_name}}" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{request.user.last_name}}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{request.user.email}}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City Location:</label>
+            <input type="text" id="city" name="location" required>
+        </div>
+        <h3>Add Your Job Expierence</h3>
+        <div class="form-group">
+            <label for="job_title">Job Title:</label>
+            <input type="text" id="job_title" name="job_title">
+        </div>
+        <div class="form-group">
+            <label for="company_name">Company Name:</label>
+            <input type="text" id="company_name" name="company_name">
+        </div>
+        <div class="form-group">
+            <label for="experience">Share Your Experience:</label>
+            <textarea id="experience" name="experience"></textarea>
+        </div>
+        <h3>Upload Your Resume</h3>
+        <div class="form-group">
+            <label for="resume">Choose Your File:</label>
+            <div class="file-upload-container">
+                <button class="file-upload-button">Upload a File</button>
+                <input type="file" id="resume" name="resume" required class="file-upload-input">
+            </div>
+        </div>
+        <input type="submit" value="Submit" name="submit" class="btn center-container">
+
+    </form>
+</div>
+
+
+{% endblock %}

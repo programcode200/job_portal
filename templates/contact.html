@@ -1,0 +1,134 @@
+{%extends "base.html"%}
+{% load static %}
+{% block content %}
+
+<style>
+    .heading-title {
+        border-top: 1rem solid var(--main-color);
+        border-bottom: 1rem solid var(--main-color);
+        background-color: var(--black);
+        color: var(--white);
+        text-align: center;
+        padding: 2rem 2rem;
+        font-size: 3.5rem;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 13px;
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        height: 100px;
+    }
+    .input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+
+    .btn[type="submit"] {
+        background-color: #0077b6;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 15%;
+        margin-top: 20px;
+        margin-left: 360px;
+    }
+
+    .btn[type="submit"]:hover {
+        background-color: #023E8A;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    #skills:focus {
+        outline: none;
+        box-shadow: 0 0 2px 1px #088ed6;
+    }
+
+</style>
+
+<h2 class="heading-title">Contact US</h2>
+
+<div class="container">
+ 
+    <form action="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="help">How we can help:</label>
+            <input type="text" id="help" name="help_detail" required>
+        </div>
+
+        <label for="select-mode">Select mode</label>
+        <select id="select-mode" name="select_mode" class="input">
+            <option value="" disabled selected hidden>Select option</option>
+            <option value="employer">Employer</option>
+            <option value="jobseeker">Jobseeker</option>
+        </select>
+
+        <div class="form-group">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone No:</label>
+            <input type="text" id="phone" name="phone">
+        </div>
+        
+        <div class="form-group">
+            <label for="company-details">Company Details:</label>
+            <input type="text" id="company-details" name="company_details" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <input type="submit" class="btn" value="Submit">
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}

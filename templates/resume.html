@@ -1,0 +1,323 @@
+{% comment %} {%extends "base.html"%}
+
+{% block content %}  {% endcomment %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'resume.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        // //generating cv
+    
+        function generateCV() {
+
+            let namefield = document.getElementById("namefield").value;
+    
+            let nametem1 = document.getElementById("nametem1");
+    
+            nametem1.innerHTML = namefield;
+    
+            //direct
+    
+            document.getElementById('nametem2').innerHTML = namefield;
+    
+            //contact
+    
+            document.getElementById('contacttem').innerHTML = document.getElementById('contactfield').value;
+    
+            // email
+    
+            document.getElementById('emailtem').innerHTML = document.getElementById('emailfield').value;
+    
+            //address
+    
+            document.getElementById('addresstem').innerHTML = document.getElementById('addressfield').value;
+    
+            // links
+    
+            document.getElementById('githubtem').innerHTML = document.getElementById('gitfield').value;
+    
+            document.getElementById('linkedtem').innerHTML = document.getElementById('linkedfield').value;
+    
+            document.getElementById('twittertem').innerHTML = document.getElementById('twitterfield').value;
+    
+            // objective
+    
+            document.getElementById('objtem').innerHTML = document.getElementById('objfield').value;
+    
+    
+            document.getElementById('academictem').innerHTML = document.getElementById('academicfield').value;
+    
+            document.getElementById('skillstem').innerHTML = document.getElementById('skillsfield').value;
+    
+            document.getElementById('worktem').innerHTML = document.getElementById('workfield').value;
+    
+            document.getElementById('projecttem').innerHTML = document.getElementById('projectfield').value;
+    
+    
+            document.getElementById("cv-form").style.display = "none";
+    
+            document.getElementById("cv-template").style.display = "block";
+    
+    
+    
+        }
+        //print cv
+        function printCV() {
+            document.getElementById('print').style.display="none";
+            document.getElementById('resume_heading').style.display="none";
+
+            window.print();
+            document.getElementById('print').style.display="inline-block";
+            document.getElementById('resume_heading').style.display="block";
+
+        }
+    //for download cv
+    //      function downloadCV() {
+    //     // var pdf = new jsPDF();
+    //     // pdf.addHTML(document.getElementById('cv-template'), function() {
+    //     //     pdf.save('resume.pdf');
+    //         const content = document.getElementById('cv-template');
+    //             const pdf = new jsPDF();
+                
+    //             // Convert HTML content to a canvas-friendly format
+    //             html2canvas(content).then(canvas => {
+    //                 // Add canvas to PDF
+    //                 pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    //                 // Save PDF
+    //                 pdf.save('generated-pdf.pdf');
+    //             });
+    // //   });
+    //  }
+    
+    </script>
+</head>
+<body>
+    
+    <h1 class="text-center heading-title" id="resume_heading">Resume Generator</h1>
+<div class="container" id="cv-form">
+
+    <div class="row">
+        <div class="col-md-6">
+            <!-- first column -->
+
+            <h3 class="my-3">Personal Information</h3>
+            <div class="form-group">
+                <label for="nameField">Your Name</label>
+                <input type="text" id="namefield" placeholder="Enter Name" class="form-control">
+            </div>
+
+            <div class="form-group my-2">
+                <label for="contactField">Your Contact</label>
+                <input type="text" id="contactfield" placeholder="Contact NO" class="form-control">
+            </div>
+
+            <div class="form-group my-2">
+                <label for="emailField">Email ID</label>
+                <input type="text" id="emailfield" placeholder="Enter here" class="form-control">
+            </div>
+
+            <div class="form-group my-2">
+                <label for="addressField">Your Address</label>
+                <textarea id="addressfield" placeholder="Enter Address" class="form-control"></textarea>
+            </div>
+
+            <p class="text-primary my-3">Important Links</p>
+
+            <div class="form-group">
+                <label for="gitField">GitHub Link</label>
+                <input type="text" id="gitfield" placeholder="Enter Here" class="form-control">
+            </div>
+
+            <div class="form-group my-2">
+                <label for="linkedField">LinkedIn</label>
+                <input type="text" id="linkedfield" placeholder="Enter here" class="form-control">
+            </div>
+
+            <div class="form-group my-2">
+                <label for="twitterField">Twitter</label>
+                <input type="text" id="twitterfield" placeholder="Enter here" class="form-control">
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <!--second column-->
+
+
+            <h3 class="my-3">Professional Information</h3>
+
+            <div class="form-group mt-2">
+                <label for="">Objective</label>
+                <textarea id="objfield" placeholder="Enter Here" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group my-2">
+                <label for="">Academic Qualification</label>
+                <textarea id="academicfield" placeholder="Enter Here" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group my-2">
+                <label for="">Skills</label>
+                <textarea id="skillsfield" placeholder="Enter Here" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group my-2">
+                <label for="">work Experience</label>
+                <textarea id="workfield" placeholder="Enter Here" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group my-2">
+                <label for="">Projects and Achievement</label>
+                <textarea id="projectfield" placeholder="Enter Here" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="container2 text-center mt-4 py-4">
+        <button onclick="generateCV()" class="btn btn-primary btn-lg">Generate CV</button>
+    </div>
+
+</div>
+
+
+
+<!-- cv template -->
+
+<div class="container" id="cv-template">
+    <div class="row">
+        <div class="col-md-4 text-center py-4 background">
+            <!-- first-column -->
+
+            <img src="{% static 'images/profilepic.jpg' %}" alt="profile picture" class="img-fluid myimg" />
+
+            <div class="container1">
+                <p id="nametem1">Rohan N Sawant</p>
+                <p id="contacttem">9767543424 , 6753564323</p>
+                <p id="emailtem">qwerty@gmail.com</p>
+                <p id="addresstem">wertyuiop / wertyui qwertyu mumbai , india</p>
+
+                <hr>
+                <p>
+                    <a id="githubtem" href="https://github.com/">GitHub</a>
+                </p>
+                <p>
+                    <a id="linkedtem" href="https://www.linkedin.com/">LinkedIn</a>
+                </p>
+                <p>
+                    <a id="twittertem" href="https://twitter.com/">Twitter</a>
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8 py-5">
+            <!-- second-colomn -->
+
+            <h1 id="nametem2" class="text-center" style="font-weight:750"> Rohan N Sawant</h1>
+
+            <!-- objective-card -->
+
+            <div class="card mt-4">
+                <div class="card-header background">
+                    <h4>Objective</h4>
+                </div>
+
+                <div class="card-body">
+                    <p id="objtem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque recusandae quas eos
+                        id quae nam
+                        facere numquam culpa earum voluptas nobis ducimus ipsam commodi quo natus unde consectetur dicta
+                        laudantium magnam voluptates, vero exercitationem non? Veniam a itaque aspernatur dolores
+                        distinctio dignissimos, dicta nesciunt possimus, iure ad est vitae voluptatum.</p>
+                </div>
+            </div>
+
+            <!-- Acadamic Qualification -->
+            <div class="card mt-4">
+                <div class="card-header background">
+                    <h4>Acadamic Qualification</h4>
+                </div>
+
+                <div class="card-body">
+                    <ul id="academictem">
+                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, quae!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="card mt-4">
+                <div class="card-header background">
+                    <h4>Skills</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <ul id="skillstem">
+                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, quae!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- work Experience -->
+
+            <div class="card mt-4">
+                <div class="card-header background">
+                    <h4>Work Experience</h4>
+                </div>
+
+                <div class="card-body">
+                    <p id="worktem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque recusandae quas eos
+                        id quae nam
+                        facere numquam culpa earum voluptas nobis ducimus ipsam commodi quo natus unde consectetur dicta
+                        laudantium magnam voluptates, vero exercitationem non? Veniam a itaque aspernatur dolores
+                        distinctio dignissimos, dicta nesciunt possimus, iure ad est vitae voluptatum.</p>
+                </div>
+            </div>
+
+            <!-- Projects and Achievement -->
+
+            <div class="card mt-4">
+                <div class="card-header background">
+                    <h4>Project and Achievement</h4>
+                </div>
+
+                <div class="card-body">
+                    <p id="projecttem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque recusandae quas
+                        eos id quae nam facere numquam culpa earum voluptas nobis ducimus ipsam commodi quo natus unde consectetur dicta
+                        laudantium magnam voluptates, vero exercitationem non? Veniam a itaque aspernatur dolores
+                        distinctio dignissimos, dicta nesciunt possimus, iure ad est vitae voluptatum.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container2 mt-3 mb-4 text-center">
+            <button onclick="printCV()" class="btn" id="print">Print CV</button>
+            <!-- <button onclick="downloadCV()" class="btn" id="download">Download CV</button> -->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+{% comment %}  {% endblock %}  {% endcomment %}
