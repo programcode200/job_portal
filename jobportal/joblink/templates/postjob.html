@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    .heading-title {
+        border-top: 1rem solid var(--main-color);
+        border-bottom: 1rem solid var(--main-color);
+        background-color: var(--black);
+        color: var(--white);
+        text-align: center;
+        padding: 2rem 2rem;
+        font-size: 3.5rem;
+    }
+
+    .container {
+        width: 900px;
+        max-width: 100%;
+        background-color: #fff;
+        margin: 20px auto;
+        padding: 30px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* overflow-y: auto; */
+        margin-bottom: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        /* Center align "Add Job Basics" */
+        margin-top: 0;
+        /* Reset margin */
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-top: 20px;
+        /* Margin for Job Posting Location */
+        margin-bottom: 10px;
+        /* Margin for Which option best describes this job's Location */
+    }
+
+    h3 {
+        font-size: 19px;
+        font-weight: 700;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    input[type="text"],
+    select {
+        width: calc(100% - 22px);
+        /* Adjust for border and padding */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"]:focus,
+    select:focus,
+    #skills:focus {
+        outline: none;
+        box-shadow: 0 0 2px 1px #088ed6;
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    .psize {
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+
+    #editor {
+        width: 100%;
+        min-height: 200px;
+        border: 1px solid black;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        resize: vertical;
+    }
+
+    #skills {
+        width: calc(100% - 22px);
+        /* Adjust the width as needed */
+        min-height: 70px;
+        /* Adjust the height as needed */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        background-color: rgb(65, 60, 60);
+
+        transition: background-color 0.3s ease;
+        color: white;
+    }
+
+    button:active {
+        background-color: rgb(49, 47, 47);
+        /* Color when clicked */
+    }
+
+    button:not(:active) {
+        background-color: rgb(176, 176, 176);
+        /* Color when released */
+    }
+
+    .btn[type="submit"] {
+        background-color: #0077b6;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 20%;
+        margin-top: 20px;
+        margin-left: 330px;
+    }
+
+    .btn[type="submit"]:hover {
+        background-color: #023E8A;
+    }
+
+    .input {
+        width: 100%;
+        margin: 1rem 0;
+        font-size: 1.8rem;
+        padding: 1rem;
+        background-color: var(--light-bg);
+    }
+
+    hr {
+        background-color: blue;
+    }
+</style>
+
+{% block scripts %}
+<script src="{% static 'script.js' %}"></script>
+{% endblock %}
+
+
+<div class="heading-title">Post Job</div>
+
+<div class="container">
+    <h1>Add Job Basics</h1>
+    <form action="{% url 'savejob' %}" method="POST">
+
+        {% csrf_token %}
+
+        <label for="company-name">Enter company name</label>
+        <input type="text" id="company-name" name="company_name" class="input" required>
+
+        <label for="job-title">Job Title</label>
+        <input type="text" id="job-title" name="job-title" class="input" required>
+
+        <hr>
+
+        <h2>Job Posting Location</h2>
+        <label for="job-location">Work Mode</label>
+        <select id="job-location" name="location" class="input">
+            <option value="" disabled selected hidden>Select option</option>
+            <option value="on-site">On-site</option>
+            <option value="remote">Remote</option>
+        </select>
+
+        <div class="on-site">
+            <label for="city">City</label>
+            <input type="text" id="city" name="cityname" class="input" required>
+
+            <label for="street-address">Street Address</label>
+            <input type="text" id="street-address" name="address" class="input" required>
+            <hr>
+            <h1>Add job details</h1>
+            <h3>Salary</h3>
+            <label for="Minimum" style="font-weight: 400;">Minimum</label>
+            <input type="text" id="Minimum" name="min-sal" class="input">
+            <p class="psize">to</p>
+            <label for="Maximum" style="font-weight: 400;">Maximum</label>
+            <input type="text" id="Maximum" name="max-sal" class="input">
+
+            <label for="Rate Per" style="font-weight: 400;">Rate</label>
+            <select id="rate-period" name="rate-per" class="input">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="per-week">Per Week</option>
+                <option value="per-month">Per Month</option>
+                <option value="per-year">Per Year</option>
+            </select>
+
+            <label for="benefits">Benefits</label>
+            <input type="text" id="benefits" name="benefits" class="input">
+
+            <label for="job-type">Job Type</label>
+            <input type="text" id="job-type" name="jobtype" class="input">
+
+            <label for="schedule">Schedule</label>
+            <select id="schedule" name="schedule" class="input">
+                <option value="" disabled selected hidden>Select option</option>
+                <option value="day-shift">Day Shift</option>
+                <option value="morning-shift">Morning Shift</option>
+                <option value="night-shift">Night Shift</option>
+                <option value="mon-fri-evening-shift">Monday to Friday Shift</option>
+            </select>
+            <hr>
+            <h1>Job Requirements</h1>
+            <label for="education">Education</label>
+            <input type="text" id="education" name="education" class="input">
+
+            <label for="experience">Experience</label>
+            <input type="text" id="experience" name="experience" class="input">
+
+            <!-- Added textarea for skills -->
+            <label for="skills">Skills</label>
+            <textarea id="skills" name="skills" placeholder="Enter required skills" class="input"></textarea>
+            <hr>
+
+            <h1>Describe the job</h1>
+
+            <label for="jobdes">Job description</label>
+            <button id="bold">Bold</button>
+            <button id="italic">Italic</button>
+            <button id="unorderedList">Unordered List</button>
+
+            <input type="hidden" id="job-description" name="description">
+
+            <div id="editor" contenteditable="true" class="input"></div>
+
+
+            <h1>Self preferences</h1>
+            <label for="mobile_no">Mobile number</label>
+            <input type="text" id="mobile_no" name="mobile-no" class="input">
+
+            <label for="email">Email id</label>
+            <input type="text" id="email" name="email-id" class="input">
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
