@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-mgyq)4s*n^0_i&=&d4eclt#gx89$&hiko0o=p!8+yn7(o^^hdk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['joblink.onrender.com']
+ALLOWED_HOSTS = ['job_portal.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
