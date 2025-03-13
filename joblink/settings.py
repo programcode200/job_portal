@@ -33,7 +33,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "job_portal.onrender.com,localhost,127.0.0.1").split(",")
 
-
+CSRF_TRUSTED_ORIGINS = ['https://job-portal-ra09.onrender.com']
 
 # Application definition
 
