@@ -29,7 +29,10 @@ SECRET_KEY = 'django-insecure-mgyq)4s*n^0_i&=&d4eclt#gx89$&hiko0o=p!8+yn7(o^^hdk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['job_portal.onrender.com', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['job_portal.onrender.com', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "job_portal.onrender.com,localhost,127.0.0.1").split(",")
+
 
 
 # Application definition
@@ -144,8 +147,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Collect static files to this directory for production
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] if DEBUG else []
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
