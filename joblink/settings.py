@@ -31,7 +31,8 @@ DEBUG = False
 
 # ALLOWED_HOSTS = ['job_portal.onrender.com', 'localhost', '127.0.0.1']
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "job_portal.onrender.com,localhost,127.0.0.1").split(",")
+
+ALLOWED_HOSTS = "*"
 
 CSRF_TRUSTED_ORIGINS = ['https://job-portal-ra09.onrender.com']
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  
     'django.contrib.sessions.middleware.SessionMiddleware',
